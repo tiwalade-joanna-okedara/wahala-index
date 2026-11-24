@@ -1,0 +1,13 @@
+{
+  "about": "Each entry is one builder's first-hand report. Wahala score: 0 = no wahala at all, 5 = maximum wahala. Add yours with a pull request.",
+  "reports": [
+    {"service": "Paystack", "category": "Payments", "wahala": 0, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Solid. Split payments send money straight to the seller's bank through a subaccount."},
+    {"service": "Africa's Talking", "category": "Calls and SMS", "wahala": 1, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Reliable for calls and SMS."},
+    {"service": "SMS sender ID approval", "category": "Calls and SMS", "wahala": 3, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Approval takes days. Build a fallback provider in from day one."},
+    {"service": "CAC VAS API", "category": "Identity", "wahala": 5, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Worked in testing, failed in production. Support form, chatbot and calls didn't help. Added backup providers."},
+    {"service": "Meta Business verification", "category": "Social and messaging", "wahala": 4, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Needs CAC certificate, utility bill and matching website. If anything doesn't line up, you wait."},
+    {"service": "TikTok Shop (sellers in Nigeria)", "category": "Social commerce", "wahala": 5, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Nigeria wasn't on the seller markets list when checked. Dropped from the plan."},
+    {"service": "Apple Developer (organisation)", "category": "App stores", "wahala": 3, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Needs a D-U-N-S number, which can take one to two weeks."},
+    {"service": "Supabase", "category": "Developer tools", "wahala": 1, "date": "2026-11", "by": "tiwalade-joanna-okedara", "note": "Works the same in Ibadan as in San Francisco. The only wahala is dollar billing."}
+  ]
+}

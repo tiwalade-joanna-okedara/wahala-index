@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wahala Index: how much wahala is that Nigerian API?</title>
+<meta name="description" content="A community, first-hand reliability board for APIs and services Nigerian builders depend on.">
+<link rel="stylesheet" href="style.css">
+<style>.meter{font-size:22px;letter-spacing:2px}.big{font-size:44px;line-height:1}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}.grid .card{margin:0}</style></head><body><div class="wrap">
+<header class="top"><h1>Wahala Index 😩</h1><a href="https://github.com/tiwalade-joanna-okedara/wahala-index">Add a report on GitHub</a></header>
+<p class="tag">How much wahala is that API? First-hand reports from people building in Nigeria. 0 means it just works. 5 means pack your patience.</p>
+<div class="card row"><div><label for="q">Search</label><input id="q" placeholder="Search a service or category"></div><div><label for="sort">Sort by</label><select id="sort"><option value="most">Most wahala first</option><option value="least">Least wahala first</option><option value="az">A to Z</option></select></div></div>
+<div class="grid" id="grid"></div>
+<footer>Every score is a real report from a builder, not a lab test. Reports are dated because things change. <a href="https://github.com/tiwalade-joanna-okedara/wahala-index/blob/main/README.md#add-a-report">How to add yours</a>. Made by <a href="https://github.com/tiwalade-joanna-okedara">Tiwalade Joanna Okedara-Kalu</a>.</footer>
+</div><script>
+const FACE=['😌','🙂','😐','😬','😫','😩'],WORD=['No wahala','Small wahala','Some wahala','Plenty wahala','Serious wahala','Maximum wahala'];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let R=[];
+fetch('reports.json').then(r=>r.json()).then(d=>{const by={};d.reports.forEach(r=>{(by[r.service]=by[r.service]||{service:r.service,category:r.category,list:[]}).list.push(r)});
+ R=Object.values(by).map(s=>({...s,avg:s.list.reduce((a,b)=>a+b.wahala,0)/s.list.length}));['q','sort'].forEach(i=>document.getElementById(i).addEventListener('input',render));render();});
+function render(){const q=document.getElementById('q').value.toLowerCase(),so=document.getElementById('sort').value;
+ let x=R.filter(s=>!q||(s.service+' '+s.category).toLowerCase().includes(q));
+ x.sort(so==='az'?(a,b)=>a.service.localeCompare(b.service):so==='least'?(a,b)=>a.avg-b.avg:(a,b)=>b.avg-a.avg);
+ document.getElementById('grid').innerHTML=x.map(s=>{const v=Math.round(s.avg),last=s.list[s.list.length-1];return `<div class="card"><div class="row" style="align-items:center"><div style="flex:0 0 auto" class="big">${FACE[v]}</div><div><b>${esc(s.service)}</b><br><span class="muted">${esc(s.category)}</span></div></div>
+ <p style="margin:10px 0 4px"><b>${WORD[v]}</b> · ${s.avg.toFixed(1)}/5 · ${s.list.length} report${s.list.length>1?'s':''}</p><div class="meter">${'🔥'.repeat(v)}${'·'.repeat(5-v)}</div><p class="muted" style="margin-bottom:0">"${esc(last.note)}" <br>${esc(last.date)} · @${esc(last.by)}</p></div>`}).join('')||'<p>No matches.</p>';}
+</script></body></html>
